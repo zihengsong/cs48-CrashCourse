@@ -70,6 +70,34 @@ public class CourseScraper {
 		    		System.out.println(title.text());
 		    	}
 		    }
+		    
+//		    for (int i = 0; i < courseTitle.size(); i++) {
+//		    	if (courseTitle.eq(i).text().length() > 1) {
+//		    		System.out.println(courseTitle.eq(i).text());
+//		    	}
+//		    }
+		    
+//		    Elements courseID = doc.select("#CourseTitle");
+//		    
+//		    for (Element course : courseID) {
+//	    		System.out.println(course.text());
+//		    }
+		    
+//		    Elements courseID = doc.select("tr.CourseInfoRow");
+//		    for (Element course : courseID) {
+//	    		Elements professors = course.select("td:nth-child(6)");
+//	    		if (professors.text().length() > 1) {
+//	    			System.out.println(professors.text());
+//	    		}
+//		    }
+		    
+//		    Elements courseID = doc.select("tr.CourseInfoRow");
+//		    for (Element course : courseID) {
+//	    		Elements professors = course.select("td:nth-child(6)");
+//	    		if (professors.text().length() > 1) {
+//	    			System.out.println(professors.text());
+//	    		}
+//		    }
 
 		} catch (IOException e) {
 		    e.printStackTrace();
