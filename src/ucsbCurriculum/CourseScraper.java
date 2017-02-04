@@ -63,41 +63,32 @@ public class CourseScraper {
 		    		.cookies( ucsbCurriculum.cookies() )
 		    		.post();
 		    		    
-		    Elements courseTitle = doc.select("td.PrimaryCourse");
-		    
-		    for (Element title : courseTitle) {
-		    	if (title.text().length() > 1) {
-		    		System.out.println(title.text());
-		    	}
-		    }
-		    
-//		    for (int i = 0; i < courseTitle.size(); i++) {
-//		    	if (courseTitle.eq(i).text().length() > 1) {
-//		    		System.out.println(courseTitle.eq(i).text());
+//		    Elements courseTitle = doc.select("td.PrimaryCourse");
+//		    for (Element title : courseTitle) {
+//		    	if (title.text().length() > 1) {
+//		    		System.out.println(title.text());
 //		    	}
 //		    }
 		    
-//		    Elements courseID = doc.select("#CourseTitle");
-//		    
-//		    for (Element course : courseID) {
-//	    		System.out.println(course.text());
-//		    }
-		    
-//		    Elements courseID = doc.select("tr.CourseInfoRow");
-//		    for (Element course : courseID) {
-//	    		Elements professors = course.select("td:nth-child(6)");
+		    Elements courseRow = doc.select("tr.CourseInfoRow");
+		    for (Element row : courseRow) {
+	    		Elements professors = row.select("td:nth-child(6)");
+	    		Element courses = row.select("td:nth-child(2)").get(0);
+	    		String courseName = courses.text();
+	    		String professorName = professors.text();
+	    		courseName = courseName.split(" Click")[0];
+	    		
+	    		if (professorName.length() > 1) {
+	    			System.out.println(courseName + ", " + professorName);
+	    		} else {
+	    			System.out.println(courseName);	
+	    		}
+	    		
 //	    		if (professors.text().length() > 1) {
 //	    			System.out.println(professors.text());
 //	    		}
-//		    }
-		    
-//		    Elements courseID = doc.select("tr.CourseInfoRow");
-//		    for (Element course : courseID) {
-//	    		Elements professors = course.select("td:nth-child(6)");
-//	    		if (professors.text().length() > 1) {
-//	    			System.out.println(professors.text());
-//	    		}
-//		    }
+		    }
+
 
 		} catch (IOException e) {
 		    e.printStackTrace();
