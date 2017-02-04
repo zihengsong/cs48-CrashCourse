@@ -62,31 +62,33 @@ public class CourseScraper {
 		    		.data("ctl00$pageContent$searchButton.y", "13")
 		    		.cookies( ucsbCurriculum.cookies() )
 		    		.post();
-		    		    
-//		    Elements courseTitle = doc.select("td.PrimaryCourse");
-//		    for (Element title : courseTitle) {
-//		    	if (title.text().length() > 1) {
-//		    		System.out.println(title.text());
-//		    	}
-//		    }
 		    
 		    Elements courseRow = doc.select("tr.CourseInfoRow");
 		    for (Element row : courseRow) {
-	    		Elements professors = row.select("td:nth-child(6)");
-	    		Element courses = row.select("td:nth-child(2)").get(0);
-	    		String courseName = courses.text();
-	    		String professorName = professors.text();
-	    		courseName = courseName.split(" Click")[0];
+	    		Elements Professors = row.select("td:nth-child(6)");
+	    		Elements courseID = row.select("td:nth-child(2)");
+	    		Elements courseTitle = row.select("td:nth-child(3)");
+	    		Elements Days = row.select("td:nth-child(7)");
+	    		Elements Time = row.select("td:nth-child(8)");
+	    		Elements Location = row.select("td:nth-child(9)");
+	    		
+	    		String id = courseID.text().split(" Click")[0];
+	    		String title = courseTitle.text().split(" Click")[0];
+	    		String professorName = Professors.text();
+	    		String day = Days.text();
+	    		String time = Time.text();
+	    		String location = Location.text();
 	    		
 	    		if (professorName.length() > 1) {
-	    			System.out.println(courseName + ", " + professorName);
+	    			System.out.println(id + ": " + 
+	    					title + ", " + 
+	    					professorName + ", " + 
+	    					day + " @ " + time + ", " +
+	    					location);
 	    		} else {
-	    			System.out.println(courseName);	
+	    			System.out.println(id + ", " + day + " @ " + time + ", " +
+	    					location);	
 	    		}
-	    		
-//	    		if (professors.text().length() > 1) {
-//	    			System.out.println(professors.text());
-//	    		}
 		    }
 
 
@@ -96,7 +98,7 @@ public class CourseScraper {
 	}
 	
 	public static void main(String[] args) {
-		getCourseListFor("CMPSC", "20172", "Undergraduate");
+		getCourseListFor("phys", "20172", "Undergraduate");
 //		printDepartments();
 	}
 }
