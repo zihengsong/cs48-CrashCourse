@@ -51,19 +51,24 @@ public class CourseScraper {
 		    e = page.select("input[id=__EVENTVALIDATION]").first();
 		    String eventValidation = e.attr("value");
 		    
-		    Document doc = Jsoup.connect(url)
+		    ucsbCurriculum = Jsoup.connect(url)
 		    		.data("__VIEWSTATE", viewState)
 		    		.data("__VIEWSTATEGENERATOR", viewStateGenerator)
 		    		.data("__EVENTVALIDATION", eventValidation)
 		    		.data("ctl00$pageContent$courseList", courseDepartment.toUpperCase())
 		    		.data("ctl00$pageContent$quarterList", quarter)
 		    		.data("ctl00$pageContent$dropDownCourseLevels", courseLevel)
-		    		.data("ctl00$pageContent$searchButton.x", "21")
-		    		.data("ctl00$pageContent$searchButton.y", "13")
+		    		.data("ctl00$pageContent$searchButton.x", "99")
+		    		.data("ctl00$pageContent$searchButton.y", "99")
 		    		.cookies( ucsbCurriculum.cookies() )
-		    		.post();
+		    		.maxBodySize(0)
+		    	    .timeout(60000)
+		    		.method(Connection.Method.POST)
+		    		.execute();
 		    
-		    Elements courseRow = doc.select("tr.CourseInfoRow");
+		    page = ucsbCurriculum.parse(); 
+		    
+		    Elements courseRow = page.select("tr.CourseInfoRow");
 		    for (Element row : courseRow) {
 	    		Elements Professors = row.select("td:nth-child(6)");
 	    		Elements courseID = row.select("td:nth-child(2)");
@@ -78,27 +83,30 @@ public class CourseScraper {
 	    		String day = Days.text();
 	    		String time = Time.text();
 	    		String location = Location.text();
+	    		String formatted;
 	    		
 	    		if (professorName.length() > 1) {
-	    			System.out.println(id + ": " + 
-	    					title + ", " + 
-	    					professorName + ", " + 
-	    					day + " @ " + time + ", " +
-	    					location);
+	    			formatted = id + ": " + title + ", " + professorName + ", " + 
+	    						day + " @ " + time + ", " + location;
+
+	    			System.out.println(formatted);
 	    		} else {
-	    			System.out.println(id + ", " + day + " @ " + time + ", " +
-	    					location);	
+	    			String tab = "";
+	    			for (int i = 0; i < id.length()+2; i++) {
+	    				tab += " ";
+	    			}
+	    			
+	    			formatted = tab + day + " @ " + time + ", " + location;
+	    			System.out.println(formatted);	
 	    		}
 		    }
-
-
 		} catch (IOException e) {
 		    e.printStackTrace();
 		}
 	}
 	
 	public static void main(String[] args) {
-		getCourseListFor("phys", "20172", "Undergraduate");
+		getCourseListFor("CMPSC", "20172", "Undergraduate");
 //		printDepartments();
 	}
 }
