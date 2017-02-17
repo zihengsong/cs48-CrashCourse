@@ -1,4 +1,4 @@
-package ucsbCurriculum;
+package ucsbCurriculum.CourseScraper;
 
 import java.io.IOException;
 
@@ -32,9 +32,9 @@ public class CourseScraper {
 	//				Examples: Computer Science -> "CMPSC", Black Studies -> "BL ST", Music -> "MUS"
 	// 				Run printDepartments() to see every department and its abbreviation printed out.
 	//
-	// quarter: 1 = Winter, 2 = Spring, 3 = Summer, and 4 = Fall
-	// 			(based on when the quarter begins and ends in the calendar year)
-	//			Formatting is as follows "(year)(quarter#)". For example, "20172" = Spring 2017.
+	// quarter: Formatting is as follows "(year)(quarter#)". For example, "20172" = Spring 2017. 
+	//			1 = Winter, 2 = Spring, 3 = Summer, and 4 = Fall
+	// 			(based on when quarter begins within calendar year)
 	// 			More examples: "20143" = Summer 2014, "20691" = Winter 2069
 	//
 	// courseLevel: "Undergraduate", "Graduate", or "All" (only 3 options, and first letter should be capitalized)
@@ -77,16 +77,16 @@ public class CourseScraper {
 	    		Elements Time = row.select("td:nth-child(8)");
 	    		Elements Location = row.select("td:nth-child(9)");
 	    		
-	    		String id = courseID.text().split(" Click")[0];
-	    		String title = courseTitle.text().split(" Click")[0];
+	    		String id = courseID.text().split("Click")[0];
+	    		String title = courseTitle.text().split("Click")[0];
 	    		String professorName = Professors.text();
 	    		String day = Days.text();
 	    		String time = Time.text();
 	    		String location = Location.text();
 	    		String formatted;
 	    		
-	    		if (professorName.length() > 1) {
-	    			formatted = id + ": " + title + ", " + professorName + ", " + 
+	    		if (professorName.length() > 1 && title.length() > 1) {
+	    			formatted = id + ": " + title + "// " + professorName + ", " + 
 	    						day + " @ " + time + ", " + location;
 
 	    			System.out.println(formatted);
