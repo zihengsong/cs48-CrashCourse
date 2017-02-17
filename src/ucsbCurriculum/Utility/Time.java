@@ -1,7 +1,6 @@
 package ucsbCurriculum.Utility;
 
-// convertToMin()
-// convertBackMin()
 public class Time {
-
+    int start_time;
+    int end_time;
 }

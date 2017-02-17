@@ -1,13 +1,28 @@
 package ucsbCurriculum.CourseScraper;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import org.jsoup.Jsoup;
 import org.jsoup.*;
 import org.jsoup.nodes.*;
 import org.jsoup.select.*;
 
+import ucsbCurriculum.Utility.Course;
+
 public class CourseScraper {
+    
+    private ArrayList<Course> courseList; // store all courses grabbed from website
+    
+    @Override
+    public String toString(){
+    	return "stub";
+    }
+  
+    
+    public Course get_course_by_name(String courseName){
+        
+    }
 	
 	// Prints every course department 
 	public static void printDepartments() {
