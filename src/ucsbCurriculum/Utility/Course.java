@@ -1,6 +1,5 @@
 package ucsbCurriculum.Utility;
 
-import java.io.ObjectInputStream.GetField;
 import java.util.ArrayList;
 
 import ucsbCurriculum.Utility.Time;
@@ -15,18 +14,27 @@ public class Course {
 	
 	private ArrayList<Time> lectureTimes;
 	private ArrayList<Time> sectionTimes;
+    
+    // Concstrutor
+    public Course(String name, String location, String instructor){
+        this.name = name;
+        this.location = location;
+        this.instructor = instructor;
+    }
+    
+    // Use with constructor to build a complete Course object
+    public void add_lectureTime(Time t){
+        this.lectureTimes.add(t);
+    }
+    
+    // Use with constructor to build a complete Course object
+    public void add_sectionTime(Time t){
+        this.sectionTimes.add(t);
+    }
 	
-	public String get_name(){
-		return name;
-	}
-	
-	public String get_location(){
-		return location;
-	}
-	
-	public String get_instructor(){
-		return instructor;
-	}
+	public String get_name(){return name;}
+    public String get_location(){return location;}
+	public String get_instructor(){return instructor;}
 	
 	public ArrayList<Time> get_sectionTimes(){
 		return sectionTimes;
@@ -48,7 +56,7 @@ public class Course {
 		return false;
 	}
     
-    public boolen compare(Course c1, Course c2){
+    public boolean compare(Course c1, Course c2){
         return c1.compareTo(c2);
     }
 	
