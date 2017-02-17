@@ -7,7 +7,7 @@ import stub.Time;
 public class Util {
 	
 	// return true if those two Time have conflicts
-	static boolean have_conflict(Time t1, Time t2){
+	public static boolean have_conflict(Time t1, Time t2){
 		return t1.startTime > t2.startTime ? (t1.startTime > t2.endTime) : (t2.startTime > t1.startTime);
 	}
 	
@@ -25,10 +25,10 @@ public class Util {
 //		return false;
 //	}
 	
-	static int converts_to_minute(String day, String t){
+	public static int converts_to_minute(String day, String t){
 		return 1;
 	}
-	static int converts_to_string(int minutes){
+	public static int converts_to_string(int minutes){
 		return 1;
 	}
 }

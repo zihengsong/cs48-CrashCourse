@@ -37,7 +37,7 @@ public class Course {
 	}
 	
 	// Compare all the lecture times. Return true if they have conflicts
-	boolean compareTo(Course c){
+	public boolean compareTo(Course c){
 		ArrayList<Time> t= c.get_lectureTimes();
 		int len1 = this.lectureTimes.size();
 		int len2 = t.size();
@@ -47,6 +47,10 @@ public class Course {
 					return true;
 		return false;
 	}
+    
+    public boolen compare(Course c1, Course c2){
+        return c1.compareTo(c2);
+    }
 	
 	@Override
 	public String toString() {
