@@ -74,11 +74,4 @@ public class Schedule {
     // toString()
     
     
-	public static void main (String[] args){
-		Course test1 = new Course("Physics 1", "Buchanan", "TBA");
-		Course test2 = new Course("Physics 2", "Buchanan", "TBA");
-		Course test3 = new Course("Physics 2", "Buchanan", "TBA");
-		
-	}
-    
 }
