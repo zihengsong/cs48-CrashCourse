@@ -9,6 +9,7 @@ import org.jsoup.nodes.*;
 import org.jsoup.select.*;
 
 import ucsbCurriculum.Utility.Course;
+import ucsbCurriculum.Utility.Util;
 
 public class CourseScraper {
     
@@ -111,7 +112,7 @@ public class CourseScraper {
 		    			for(int i = 0; i < day.length(); i++)
 		    				if(Character.isLetter(day.charAt(i)))
 		    				{
-		    					c.add_lectureTime(day.charAt(i), time);
+		    					c.add_lectureTime(Util.converts_to_minutes(""+day.charAt(i), time));
 		    				}
 		    			
 //		    			formatted = id + ": " + title + "// " + professorName + ", " + 
@@ -125,7 +126,7 @@ public class CourseScraper {
 		    			for(int i = 0; i < day.length(); i++)
 		    				if(Character.isLetter(day.charAt(i)))
 		    				{
-		    					c.add_sectionTime(day.charAt(i), time);
+		    					c.add_sectionTime(Util.converts_to_minutes(""+day.charAt(i), time));
 		    				}
 		    			
 		    			

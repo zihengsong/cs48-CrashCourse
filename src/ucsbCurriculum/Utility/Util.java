@@ -1,6 +1,7 @@
 package ucsbCurriculum.Utility;
 
 import java.util.ArrayList;
+import ucsbCurriculum.Utility.Time;
 
 import ucsbCurriculum.Utility.Time;
 
@@ -11,8 +12,8 @@ public class Util {
 		return t1.start_time > t2.start_time ? (t1.start_time > t2.end_time) : (t2.start_time > t1.start_time);
 	}
 	
-	public static int converts_to_minute(String day, String t){
-		return 1;
+	public static Time converts_to_minute(String day, String t){
+		return new Time();
 	}
 	public static int converts_to_string(int minutes){
 		return 1;
