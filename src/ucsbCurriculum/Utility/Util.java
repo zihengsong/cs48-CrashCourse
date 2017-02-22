@@ -2,13 +2,13 @@ package ucsbCurriculum.Utility;
 
 import java.util.ArrayList;
 
-import stub.Time;
+import ucsbCurriculum.Utility.Time;
 
 public class Util {
 	
 	// return true if those two Time have conflicts
 	public static boolean have_conflict(Time t1, Time t2){
-		return t1.startTime > t2.startTime ? (t1.startTime > t2.endTime) : (t2.startTime > t1.startTime);
+		return t1.start_time > t2.start_time ? (t1.start_time > t2.end_time) : (t2.start_time > t1.start_time);
 	}
 	
 //  save for later, this can be used for compare when adding classes
