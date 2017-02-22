@@ -56,7 +56,7 @@ public class Course {
 		return false;
 	}
     
-    public boolean compare(Course c1, Course c2){
+    public static boolean compare(Course c1, Course c2){
         return c1.compareTo(c2);
     }
 	
