@@ -8,9 +8,14 @@ import ucsbCurriculum.Utility.*;
 // ArrayList of (ArrayList of sections) 
 public class Schedule {
     // just write out the structure, change the variable name if you want
-    private ArrayList<Course> courses = new ArrayList<Course>();
-    private ArrayList<ArrayList<Time>> sections = new ArrayList<ArrayList<Time>>();
+    private ArrayList<Course> courses;
+    private ArrayList<ArrayList<Time>> sections;
     
+    
+    public Schedule(){
+        courses = new ArrayList<Course>();
+        sections = new ArrayList<ArrayList<Time>>();
+    }
     
     public static boolean compare(ArrayList<Time> time1, ArrayList<Time> time2){
 		int len1 = time1.size();
@@ -35,6 +40,8 @@ public class Schedule {
     // if c result in conflicts, then just print a message and return
     
     public void add(Course c){
+            if(c == null)
+                System.out.println("卧槽");
     		ArrayList<Time> sectionTime = c.get_sectionTimes();
 	    	for(int i = 0; i < courses.size(); i++){
 	    		Course temp = courses.get(i);

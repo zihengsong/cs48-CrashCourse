@@ -12,14 +12,16 @@ public class Course {
 	
 	//String description;  description of the course, save for later
 	
-	private ArrayList<Time> lectureTimes = new ArrayList<Time>();
-	private ArrayList<Time> sectionTimes = new ArrayList<Time>();
+	private ArrayList<Time> lectureTimes;
+	private ArrayList<Time> sectionTimes;
     
     // Concstrutor
     public Course(String name, String location, String instructor){
         this.name = name;
         this.location = location;
         this.instructor = instructor;
+        lectureTimes = new ArrayList<Time>();
+        sectionTimes = new ArrayList<Time>();
     }
     
     // Use with constructor to build a complete Course object
