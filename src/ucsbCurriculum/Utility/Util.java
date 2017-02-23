@@ -11,26 +11,6 @@ public class Util {
 	public static boolean have_conflict(Time t1, Time t2){
 		return t1.start_time > t2.start_time ? (t1.start_time > t2.end_time) : (t2.start_time > t1.start_time);
 	}
-
-//  save for later, this can be used for compare when adding classes
-	public static boolean compare(ArrayList<Time> time1, ArrayList<Time> time2){
-		
-		for(int i = 0; i < time1.size(); i++){
-			for(int j = 0; j < time2.size(); j++){
-				if(have_conflict(time1.get(i), time2.get(j))){
-					// TO-DO: delete that element in the second list
-					time2.remove(j);
-				}
-			}
-		}
-	
-		// TO-DO: check the size of time2, if it's 0, return false, otherwise return true
-//		return false; 
-		if(time2.size()==0){
-			return false;
-		}
-			return true;
-	}
 	
 	public Time converts_to_minute(String daym, String timm){
         int[] t = new int[2];
