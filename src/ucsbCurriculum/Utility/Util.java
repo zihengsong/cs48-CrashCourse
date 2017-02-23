@@ -9,10 +9,10 @@ public class Util {
 	
 	// return true if those two Time have conflicts
 	public static boolean have_conflict(Time t1, Time t2){
-		return t1.start_time > t2.start_time ? (t1.start_time > t2.end_time) : (t2.start_time > t1.start_time);
+		return t1.startTime > t2.startTime ? (t1.startTime > t2.endTime) : (t2.startTime > t1.startTime);
 	}
 	
-	public Time converts_to_minute(String daym, String timm){
+	public static Time converts_to_minute(String daym, String timm){
         int[] t = new int[2];
         int time = 0;
         char a_char;
@@ -111,9 +111,7 @@ public class Util {
 }
         
         
-        Time ti= new Time();
-        ti.startTime=timesforday+t[0];
-        ti.endTime=timesforday+t[1];
+        Time ti= new Time(timesforday+t[0], timesforday+t[1]);
         
         return ti;
  }
