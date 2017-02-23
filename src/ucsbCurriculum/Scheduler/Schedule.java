@@ -11,22 +11,74 @@ public class Schedule {
     private ArrayList<Course> courses = new ArrayList<Course>();
     private ArrayList<ArrayList<Time>> sections = new ArrayList<ArrayList<Time>>();
     
-    // if c result in a collision, return false(or throw a exceptation)
-    //returns false if course c already exists in array list of lectures
-    //returns false if course c has lecture times that overlap with previous courses' lecture times
-    public boolean add(Course c){
-    	for(int i = 0; i < courses.size(); i++){
-    		if(courses.get(i)==c){
-    			return false;
-    		}
-    		if((courses.get(i)).compareTo(c)==false){
-    			return false;
-    		}
-    	}
-    	courses.add(c);
-    	sections.add(c.get_sectionTimes());
-    	return true;
+    
+    public static boolean compare(ArrayList<Time> time1, ArrayList<Time> time2){
+		int len1 = time1.size();
+		int len2 = time2.size();
+		
+		for(int i = 0; i < len1; i++){
+			for(int j = 0; j < len2; j++){
+				if(Util.have_conflict(time1.get(i), time2.get(j))){
+					// TO-DO: delete that element in the second list
+					time2.remove(j);
+				}
+			}
+		}
+		if(time2.size()==0)
+			return false;
+		else
+			return true;
+	}
+    
+    
+    
+    // if c result in conflicts, then just print a message and return
+    
+    public void add(Course c){
+    		ArrayList<Time> sectionTime = c.get_sectionTimes();
+	    	for(int i = 0; i < courses.size(); i++){
+	    		Course temp = courses.get(i);
+	    		if(temp == c){
+	    			
+	    			// Only for command line version!!!
+	    			System.out.println("Course already added!!!");
+	    			
+	    			return;
+	    		}
+	    		if(!Course.compare(temp, c) || !compare(sections.get(i), sectionTime) || !compare(temp.get_lectureTimes(), sectionTime)){
+	    			
+	    			// Only for command line version!!!
+	    			System.out.println("Conflicts detected! This course cannot be add to schedule!");
+	    			
+	    			return;
+	    		}
+	    	}
+	    	courses.add(c);
+        	sections.add(sectionTime);
     }
+    
+    @Override
+    // only for command line version
+    public String toString(){
+    		String res = "Current Schedule:\n";
+    		
+    		for(int i = 0; i < courses.size(); i++)
+    		{
+    			Course c = courses.get(i);
+    			res += "\t " + c.get_name();
+    			ArrayList<Time> times = c.get_lectureTimes();
+    			for(int j = 0; j < times.size(); j++)
+    			{
+    				res += "";
+    			}
+    		}
+    		
+    		return res;
+    }
+    
+    
+ 
+    
     
     //removes course c's information from lecture times and section times array lists
     public void delete(Course c){
@@ -69,8 +121,7 @@ public class Schedule {
     	}
     
     
-    
-    // toString()
+   
     
     
     
