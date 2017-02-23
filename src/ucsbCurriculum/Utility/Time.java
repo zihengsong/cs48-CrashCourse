@@ -1,8 +1,8 @@
 package ucsbCurriculum.Utility;
 
 public class Time {
-    int start_time;
-    int end_time;
+    int startTime;
+    int endTime;
     
     public Time(int start, int end){
         startTime = start;

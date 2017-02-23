@@ -112,8 +112,8 @@ public class Util {
         
         
         Time ti= new Time();
-        ti.starttime=timesforday+t[0];
-        ti.endtime=timesforday+t[1];
+        ti.startTime=timesforday+t[0];
+        ti.endTime=timesforday+t[1];
         
         return ti;
  }
