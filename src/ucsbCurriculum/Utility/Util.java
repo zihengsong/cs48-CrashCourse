@@ -28,18 +28,18 @@ public class Util {
         String[] tab = timm.split("-");
         int timesforday=0;
     //converts day to int
-		String daytomin = daym;
-		if(daytomin.contains("M"))
-			timesforday=0;
-		if(daytomin.contains("T"))
-			timesforday=(24*60);
-		if(daytomin.contains("W"))
-			timesforday=(48*60);
-		if(daytomin.contains("R"))
-			timesforday=(72*60);
-		if(daytomin.contains("F"))
-			timesforday=(96*60);
-	    //converts time to int
+        String daytomin = daym;
+        if(daytomin.contains("M"))
+            timesforday=0;
+        if(daytomin.contains("T"))
+            timesforday=(24*60);
+        if(daytomin.contains("W"))
+            timesforday=(48*60);
+        if(daytomin.contains("R"))
+            timesforday=(72*60);
+        if(daytomin.contains("F"))
+            timesforday=(96*60);
+        //converts time to int
         for(int i=0; i<tab.length; i++){
             if(tab[i].contains("pm")){
                 if(tab[i].length()==8){
@@ -109,18 +109,49 @@ public class Util {
             }
  //return t;           
 }
-	    
-	    
-		Time ti= new Time();
-		ti.starttime=timesforday+t[0];
-		ti.endtime=timesforday+t[1];
-		
-		return ti;
+        
+        
+        Time ti= new Time();
+        ti.starttime=timesforday+t[0];
+        ti.endtime=timesforday+t[1];
+        
+        return ti;
  }
+ 
+public static String convert_to_string(int starttime, int endtime){
+        String[] names = {"M","T","W","R","F"};
+        //starttime
+        int startday = (starttime / (24*60));
+        String strday1 = names[startday];
+        
+        String strtime;
+        //starttime
+        int fhour;
+        int fdays = (starttime/(24*60));
+        if(fdays==0){
+            fhour = (starttime/(60))-12;
+        }
+        else
+            fhour = (starttime-(fdays*24*60))/60-12;
+        int ftenminute = (starttime-(fdays*24*60)-(fhour*60+(12*60)))/10;
+        int foneminute = (starttime-(fdays*24*60)-(fhour*60+(12*60)))%10;
+        //endtime 
+        int shour;
+        int sdays = (endtime/(24*60));
+        if(sdays==0){
+            shour = (endtime/(60))-12;
+        }
+        else
+            shour = (endtime-(sdays*24*60))/60-12;
+        int stenminute = (endtime-(sdays*24*60)-(shour*60+(12*60)))/10;
+        int soneminute = (endtime-(sdays*24*60)-(shour*60+(12*60)))%10;
+        strtime = strday1 + " " + Integer.toString(fhour)+":"+Integer.toString(ftenminute)+ Integer.toString(foneminute) + " - " + Integer.toString(shour)+":"+Integer.toString(stenminute)+ Integer.toString(soneminute)+ " ";
+        return strtime;
+    
+}
+ 
+ 
     
     
-
-	public static int converts_to_string(int minutes){
-		return 1;
-	}
+    
 }
