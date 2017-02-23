@@ -8,8 +8,8 @@ import ucsbCurriculum.Utility.*;
 // ArrayList of (ArrayList of sections) 
 public class Schedule {
     // just write out the structure, change the variable name if you want
-    private ArrayList<Course> courses;
-    private ArrayList<ArrayList<Time>> sections;
+    private ArrayList<Course> courses = new ArrayList<Course>();
+    private ArrayList<ArrayList<Time>> sections = new ArrayList<ArrayList<Time>>();
     
     
     public static boolean compare(ArrayList<Time> time1, ArrayList<Time> time2){
@@ -85,7 +85,7 @@ public class Schedule {
     	int i = courses.indexOf(c);
     	courses.remove(i);
     	sections.remove(i);
-    	System.out.println(c.get_name() + "is being deleted.");
+    	System.out.println(c.get_name() + " is being deleted.");
     	//user should be given some kind of warning - course being deleted because of time conflict/or personal choice
     }
     
@@ -95,8 +95,9 @@ public class Schedule {
     public void deleteConflicts(){
     	//first check all sections against conflicting lecture times
     	for(int i = 0; i < sections.size(); i++){
+    		boolean sectionToLectureConflict = true;
     		for(int j = 0; j < courses.size(); j++){
-    			boolean sectionToLectureConflict = Util.compare((courses.get(j)).get_lectureTimes(), sections.get(i));
+    			sectionToLectureConflict = compare((courses.get(j)).get_lectureTimes(), sections.get(i));
     			if(sectionToLectureConflict == false){
     				//false will be returned if all section times for a lecture have been removed due to conflict
     				delete(courses.get(i));
@@ -110,19 +111,18 @@ public class Schedule {
     		//now compare current section list with all previous section lists
     		boolean sectionToSectionConflict = true;
     		for(int j = i-1; j >= 0; j--){
-    			while(sectionToSectionConflict == true){
-    				sectionToSectionConflict = (Util.compare(sections.get(j), currentSection));
+    				sectionToSectionConflict = (compare(sections.get(j), currentSection));
     				if (sectionToSectionConflict == false){
     					//no available section times due to conflict; remove course c
     					delete(courses.get(i));
     					}
     				}
-    			}
     		}
     	}
     
     
    
+    
     
     
 }

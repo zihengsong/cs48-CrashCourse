@@ -1,6 +1,19 @@
 package ucsbCurriculum.Utility;
 
 public class Time {
-    public int start_time;
-    public int end_time;
+    int start_time;
+    int end_time;
+    
+    public Time(int start, int end){
+        startTime = start;
+        endTime = end;
+    }
+    
+    public int getStart(){
+        return startTime;
+    }
+    
+    public int getEnd(){
+        return endTime;
+    }
 }
