@@ -13,11 +13,9 @@ public class Util {
 	
 //  save for later, this can be used for compare when adding classes
 	public static boolean compare(ArrayList<Time> time1, ArrayList<Time> time2){
-		int len1 = time1.size();
-		int len2 = time2.size();
 		
-		for(int i = 0; i < len1; i++){
-			for(int j = 0; j < len2; j++){
+		for(int i = 0; i < time1.size(); i++){
+			for(int j = 0; j < time2.size(); j++){
 				if(have_conflict(time1.get(i), time2.get(j))){
 					// TO-DO: delete that element in the second list
 					time2.remove(j);
@@ -30,9 +28,7 @@ public class Util {
 		if(time2.size()==0){
 			return false;
 		}
-		else{
 			return true;
-		}
 	}
 	
 	public static int converts_to_minute(String day, String t){

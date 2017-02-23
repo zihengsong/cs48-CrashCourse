@@ -12,8 +12,8 @@ public class Course {
 	
 	//String description;  description of the course, save for later
 	
-	private ArrayList<Time> lectureTimes;
-	private ArrayList<Time> sectionTimes;
+	private ArrayList<Time> lectureTimes = new ArrayList<Time>();
+	private ArrayList<Time> sectionTimes = new ArrayList<Time>();
     
     // Concstrutor
     public Course(String name, String location, String instructor){
@@ -23,12 +23,12 @@ public class Course {
     }
     
     // Use with constructor to build a complete Course object
-    public void add_lectureTime(Time t){
+    public void add_lectureTimes(Time t){
         this.lectureTimes.add(t);
     }
     
     // Use with constructor to build a complete Course object
-    public void add_sectionTime(Time t){
+    public void add_sectionTimes(Time t){
         this.sectionTimes.add(t);
     }
 	
