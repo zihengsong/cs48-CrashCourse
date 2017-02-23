@@ -116,7 +116,7 @@ public class CourseScraper {
 		    			for(int i = 0; i < day.length(); i++)
 		    				if(Character.isLetter(day.charAt(i)))
 		    				{
-		    					c.add_lectureTime(Util.converts_to_minutes(""+day.charAt(i), time));
+		    					c.add_lectureTimes(Util.converts_to_minutes(""+day.charAt(i), time));
 		    				}
 		    			
 //		    			formatted = id + ": " + title + "// " + professorName + ", " + 
@@ -130,7 +130,7 @@ public class CourseScraper {
 		    			for(int i = 0; i < day.length(); i++)
 		    				if(Character.isLetter(day.charAt(i)))
 		    				{
-		    					c.add_sectionTime(Util.converts_to_minutes(""+day.charAt(i), time));
+		    					c.add_sectionTimes(Util.converts_to_minutes(""+day.charAt(i), time));
 		    				}
 		    			
 		    			
