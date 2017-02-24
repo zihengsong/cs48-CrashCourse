@@ -62,19 +62,22 @@ public class Schedule {
     @Override
     // only for command line version
     public String toString() {
-		String res = "Current Schedule:\n";
-		
-		for (int i = 0; i < courses.size(); i++) {
-			Course c = courses.get(i);
-			res += "\t " + c.get_name();
-			ArrayList<Time> times = c.get_lectureTimes();
-			
-			for(int j = 0; j < times.size(); j++) {
-				res += "";
-			}
-		}
-		
-		return res;
+		String res = "Current Schedule:\n\n";
+    		
+    	for(int i = 0; i < courses.size(); i++)
+    	{
+    		Course c = courses.get(i);
+    		res += c.get_name() + "\t";
+    		ArrayList<Time> lectureTimes = c.get_lectureTimes();
+    		for(int j = 0; j < lectureTimes.size(); j++)
+    		{
+    			res += lectureTimes.get(j) + "\t";
+    		}
+            res += "\n\t\t\t" + "Section Time" + "\t";
+            ArrayList<Time> sectionTimes = c.get_sectionTimes();
+            res += sectionTimes.get(0) + "\n";
+    	}
+    	return res;
     }
 
     //removes course c's information from lecture times and section times array lists

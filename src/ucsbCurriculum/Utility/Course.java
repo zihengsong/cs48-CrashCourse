@@ -68,9 +68,9 @@ public class Course {
 	
 	@Override
 	public String toString() {
-		// stub
-		// to-do
-		return super.toString();
+		// not done yet
+//		String res = name + ": " + instructor + " @ " + time + ", " + location;
+		return "something";
 	}
 }
 
