@@ -16,11 +16,12 @@ public class Schedule {
     }
 
     public static boolean compare(ArrayList<Time> time1, ArrayList<Time> time2) {
-      int len1 = time1.size();
-      int len2 = time2.size();
+      
+      if(time1.size() == 0 || time2.size() == 0)
+          return true;
 
-      for (int i = 0; i < len1; i++) {
-        for (int j = 0; j < len2; j++) {
+      for (int i = 0; i < time1.size(); i++) {
+        for (int j = 0; j < time2.size(); j++) {
           if (Util.have_conflict(time1.get(i), time2.get(j))) {
             // TO-DO: delete that element in the second list
             time2.remove(j);
@@ -63,20 +64,23 @@ public class Schedule {
     public String toString() {
 		String res = "Current Schedule:\n\n";
     		
-    	for(int i = 0; i < courses.size(); i++)
-    	{
-    		Course c = courses.get(i);
-    		res += c.get_name() + "\t";
-    		ArrayList<Time> lectureTimes = c.get_lectureTimes();
-    		for(int j = 0; j < lectureTimes.size(); j++)
-    		{
-    			res += lectureTimes.get(j) + "\t";
-    		}
-            res += "\n\t\t\t" + "Section Time" + "\t";
-            ArrayList<Time> sectionTimes = c.get_sectionTimes();
-            res += sectionTimes.get(0) + "\n";
-    	}
-    	return res;
+	    	for(int i = 0; i < courses.size(); i++)
+	    	{
+	    		Course c = courses.get(i);
+	    		res += c.get_id() + c.get_name() + "\t";
+	    		ArrayList<Time> lectureTimes = c.get_lectureTimes();
+	    		for(int j = 0; j < lectureTimes.size(); j++)
+	    		{
+	    			res += Util.convert_to_string(lectureTimes.get(j)) + "\t";
+	    		}
+	            res += "\n\t\t\t" + "Section Time" + "\t";
+	            ArrayList<Time> sectionTimes = sections.get(i);
+	            if(sectionTimes.size() != 0)
+	                res += Util.convert_to_string(sectionTimes.get(0)) + "\n";
+	            else
+	                res += "\n";
+	    	}
+	    	return res;
     }
     
     

@@ -117,7 +117,10 @@ public class Util {
         return ti;
 	}
  
-	public static String convert_to_string(int starttime, int endtime) {
+	public static String convert_to_string(Time t) {
+		int starttime = t.startTime;
+	    int endtime = t.endTime;
+	    
         String[] names = {"M","T","W","R","F"};
         
         //starttime
