@@ -27,9 +27,10 @@ public class CourseScraper {
     
     public Course get_course_by_name(String courseName){
         for(int i = 0; i < courseList.size(); i++){
-        		if(courseList.get(i).get_name() == courseName)
+        		if(courseList.get(i).get_id().equals(courseName))
         			return courseList.get(i);
         }
+        System.out.println("こんにちわ");
         return null;
     }
 	
@@ -98,57 +99,57 @@ public class CourseScraper {
 		    Elements courseRow = page.select("tr.CourseInfoRow");
       
 		    for (Element row : courseRow) {
-	    		Elements Professors = row.select("td:nth-child(6)");
-	    		Elements courseID = row.select("td:nth-child(2)");
-	    		Elements courseTitle = row.select("td:nth-child(3)");
-	    		Elements Days = row.select("td:nth-child(7)");
-	    		Elements Time = row.select("td:nth-child(8)");
-	    		Elements Location = row.select("td:nth-child(9)");
-	    		
-	    		String id = courseID.text().split("Click")[0];
-	    		String title = courseTitle.text().split("Click")[0];
-	    		String professorName = Professors.text();
-	    		String day = Days.text();
-	    		String time = Time.text();
-	    		String location = Location.text();
-          String formatted;
-	    		
-	    		if (professorName.length() > 1 && title.length() > 1) {
-	    			if(c != null)
-	    				courseList.add(c);
-	    			c = new Course(id, title, location, professorName);
-	    			
-	    			for(int i = 0; i < day.length(); i++)
-	    				if(Character.isLetter(day.charAt(i))) {
-	    					c.add_lectureTimes(Util.converts_to_minute(""+day.charAt(i), time));
-	    				}
+		    		Elements Professors = row.select("td:nth-child(6)");
+		    		Elements courseID = row.select("td:nth-child(2)");
+		    		Elements courseTitle = row.select("td:nth-child(3)");
+		    		Elements Days = row.select("td:nth-child(7)");
+		    		Elements Time = row.select("td:nth-child(8)");
+		    		Elements Location = row.select("td:nth-child(9)");
+		    		
+		    		String id = courseID.text().split("Click")[0];
+		    		String title = courseTitle.text().split("Click")[0];
+		    		String professorName = Professors.text();
+		    		String day = Days.text();
+		    		String time = Time.text();
+		    		String location = Location.text();
+		    		String formatted;
+		    		
+		    		if (professorName.length() > 1 && title.length() > 1) {
+		    			if(c != null)
+		    				courseList.add(c);
+		    			c = new Course(id, title, location, professorName);
 		    			
-		    			formatted = id + ": " + title + "// " + professorName + ", " + 
-		    						day + " @ " + time + ", " + location;
-		    						
-		    			res += formatted + "\n";
-	
-//		    			System.out.println(formatted);
-		    		} 
-	    		else {
-	    			for(int i = 0; i < day.length(); i++)
-	    				if(Character.isLetter(day.charAt(i))) {
-	    					c.add_sectionTimes(Util.converts_to_minute(""+day.charAt(i), time));
-	    				}
-	    			
-	    			
-		    			String tab = "";
-		    			for (int i = 0; i < id.length()+2; i++) {
-		    				tab += " ";
-		    			}
+		    			for(int i = 0; i < day.length(); i++)
+		    				if(Character.isLetter(day.charAt(i))) {
+		    					c.add_lectureTimes(Util.converts_to_minute(""+day.charAt(i), time));
+		    				}
+			    			
+			    			formatted = id + ": " + title + "// " + professorName + ", " + 
+			    						day + " @ " + time + ", " + location;
+			    						
+			    			res += formatted + "\n";
+		
+	//		    			System.out.println(formatted);
+			    		} 
+		    		else {
+		    			for(int i = 0; i < day.length(); i++)
+		    				if(Character.isLetter(day.charAt(i))) {
+		    					c.add_sectionTimes(Util.converts_to_minute(""+day.charAt(i), time));
+		    				}
 		    			
-            formatted = tab + day + " @ " + time + ", " + location;
-            res += formatted + "\n";
-//		    			System.out.println(formatted);	
-	    		}
+		    			
+			    			String tab = "";
+			    			for (int i = 0; i < id.length()+2; i++) {
+			    				tab += " ";
+			    			}
+			    			
+	            formatted = tab + day + " @ " + time + ", " + location;
+	            res += formatted + "\n";
+	//		    			System.out.println(formatted);	
+		    		}
 		    }
 		    if (c != null)
-          courseList.add(c);
+		    		courseList.add(c);
 		} catch (IOException e) {
 		    e.printStackTrace();
 		}

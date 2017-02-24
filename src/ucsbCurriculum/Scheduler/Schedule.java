@@ -4,12 +4,11 @@ import java.util.ArrayList;
 
 import ucsbCurriculum.Utility.*;
 
-// ArrayList of lectures
-// ArrayList of (ArrayList of sections) 
+
 public class Schedule {
-    // just write out the structure, change the variable name if you want
-    private ArrayList<Course> courses;
-    private ArrayList<ArrayList<Time>> sections;
+	 
+    private ArrayList<Course> courses; // ArrayList of lectures
+    private ArrayList<ArrayList<Time>> sections;  // ArrayList of (ArrayList of sections) 
     
     public Schedule(){
         courses = new ArrayList<Course>();
@@ -42,8 +41,7 @@ public class Schedule {
       ArrayList<Time> sectionTime = c.get_sectionTimes();
       for (int i = 0; i < courses.size(); i++) {
         Course temp = courses.get(i);
-
-        if (temp == c) {	
+        if (temp.equals(c)) {	
           // Only for command line version!!!
           System.out.println("Course already added!!!");
           return;
@@ -59,8 +57,9 @@ public class Schedule {
       sections.add(sectionTime);
     }
     
+    
+    
     @Override
-    // only for command line version
     public String toString() {
 		String res = "Current Schedule:\n\n";
     		
@@ -79,14 +78,16 @@ public class Schedule {
     	}
     	return res;
     }
+    
+    
 
     //removes course c's information from lecture times and section times array lists
     public void delete(Course c) {
-    	int i = courses.indexOf(c);
-    	courses.remove(i);
-    	sections.remove(i);
-    	System.out.println(c.get_name() + " is being deleted.");
-    	//user should be given some kind of warning - course being deleted because of time conflict/or personal choice
+	    	int i = courses.indexOf(c);
+	    	courses.remove(i);
+	    	sections.remove(i);
+	    	System.out.println(c.get_name() + " is being deleted.");
+	    	//user should be given some kind of warning - course being deleted because of time conflict/or personal choice
     }
     
     //goes through array list of sections and deletes all section times that have conflicts with other times
