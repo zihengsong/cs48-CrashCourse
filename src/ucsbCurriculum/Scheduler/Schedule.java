@@ -4,12 +4,11 @@ import java.util.ArrayList;
 
 import ucsbCurriculum.Utility.*;
 
-// ArrayList of lectures
-// ArrayList of (ArrayList of sections) 
+
 public class Schedule {
-    // just write out the structure, change the variable name if you want
-    private ArrayList<Course> courses;
-    private ArrayList<ArrayList<Time>> sections;
+	 
+    private ArrayList<Course> courses; // ArrayList of lectures
+    private ArrayList<ArrayList<Time>> sections;  // ArrayList of (ArrayList of sections) 
     
     public Schedule(){
         courses = new ArrayList<Course>();
@@ -17,11 +16,12 @@ public class Schedule {
     }
 
     public static boolean compare(ArrayList<Time> time1, ArrayList<Time> time2) {
-      int len1 = time1.size();
-      int len2 = time2.size();
+      
+      if(time1.size() == 0 || time2.size() == 0)
+          return true;
 
-      for (int i = 0; i < len1; i++) {
-        for (int j = 0; j < len2; j++) {
+      for (int i = 0; i < time1.size(); i++) {
+        for (int j = 0; j < time2.size(); j++) {
           if (Util.have_conflict(time1.get(i), time2.get(j))) {
             // TO-DO: delete that element in the second list
             time2.remove(j);
@@ -42,8 +42,7 @@ public class Schedule {
       ArrayList<Time> sectionTime = c.get_sectionTimes();
       for (int i = 0; i < courses.size(); i++) {
         Course temp = courses.get(i);
-
-        if (temp == c) {	
+        if (temp.equals(c)) {	
           // Only for command line version!!!
           System.out.println("Course already added!!!");
           return;
@@ -59,34 +58,40 @@ public class Schedule {
       sections.add(sectionTime);
     }
     
+    
+    
     @Override
-    // only for command line version
     public String toString() {
 		String res = "Current Schedule:\n\n";
     		
-    	for(int i = 0; i < courses.size(); i++)
-    	{
-    		Course c = courses.get(i);
-    		res += c.get_name() + "\t";
-    		ArrayList<Time> lectureTimes = c.get_lectureTimes();
-    		for(int j = 0; j < lectureTimes.size(); j++)
-    		{
-    			res += lectureTimes.get(j) + "\t";
-    		}
-            res += "\n\t\t\t" + "Section Time" + "\t";
-            ArrayList<Time> sectionTimes = c.get_sectionTimes();
-            res += sectionTimes.get(0) + "\n";
-    	}
-    	return res;
+	    	for(int i = 0; i < courses.size(); i++)
+	    	{
+	    		Course c = courses.get(i);
+	    		res += c.get_id() + c.get_name() + "\t";
+	    		ArrayList<Time> lectureTimes = c.get_lectureTimes();
+	    		for(int j = 0; j < lectureTimes.size(); j++)
+	    		{
+	    			res += Util.convert_to_string(lectureTimes.get(j)) + "\t";
+	    		}
+	            res += "\n\t\t\t" + "Section Time" + "\t";
+	            ArrayList<Time> sectionTimes = sections.get(i);
+	            if(sectionTimes.size() != 0)
+	                res += Util.convert_to_string(sectionTimes.get(0)) + "\n";
+	            else
+	                res += "\n";
+	    	}
+	    	return res;
     }
+    
+    
 
     //removes course c's information from lecture times and section times array lists
     public void delete(Course c) {
-    	int i = courses.indexOf(c);
-    	courses.remove(i);
-    	sections.remove(i);
-    	System.out.println(c.get_name() + " is being deleted.");
-    	//user should be given some kind of warning - course being deleted because of time conflict/or personal choice
+	    	int i = courses.indexOf(c);
+	    	courses.remove(i);
+	    	sections.remove(i);
+	    	System.out.println(c.get_name() + " is being deleted.");
+	    	//user should be given some kind of warning - course being deleted because of time conflict/or personal choice
     }
     
     //goes through array list of sections and deletes all section times that have conflicts with other times

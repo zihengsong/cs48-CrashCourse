@@ -65,6 +65,18 @@ public class Course {
     public static boolean compare(Course c1, Course c2) {
         return c1.compareTo(c2);
     }
+    
+    @Override
+    public boolean equals(Object obj) {
+	    if(obj == null)
+	    		return false;
+	    if(obj.getClass() != Course.class)
+	    		return false;
+	    Course c = (Course)obj;
+	    if(c.get_id() == this.id)
+	    		return true;
+	    return false;
+    }
 	
 	@Override
 	public String toString() {
