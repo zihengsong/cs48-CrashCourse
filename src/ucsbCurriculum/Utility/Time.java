@@ -4,16 +4,16 @@ public class Time {
     public int startTime;
     public int endTime;
     
-    public Time(int start, int end){
+    public Time(int start, int end) {
         startTime = start;
         endTime = end;
     }
     
-    public int getStart(){
+    public int getStart() {
         return startTime;
     }
     
-    public int getEnd(){
+    public int getEnd() {
         return endTime;
     }
 }
