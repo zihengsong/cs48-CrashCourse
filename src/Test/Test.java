@@ -1,5 +1,7 @@
 package Test;
 
+import java.util.ArrayList;
+import java.util.Scanner;
 import ucsbCurriculum.*;
 
 import ucsbCurriculum.CourseScraper.CourseScraper;
@@ -19,7 +21,6 @@ public class Test {
 		
 		System.out.println("This is a demo program for CrashCourse. This program grabs information from the UCSB Curriculum Search page and demos a few sample schedules.");
 		
-		
 		scraper.getCourseListFor("CMPSC", "20172", "Undergraduate");
 		Course cs8 = scraper.get_course_by_name("CMPSC 8 ");
 		Course cs24 = scraper.get_course_by_name("CMPSC 24 ");
@@ -30,6 +31,7 @@ public class Test {
 		Course math4a = scraper.get_course_by_name("MATH 4A ");
 		Course math6a = scraper.get_course_by_name("MATH 6A ");
 		Course math3a = scraper.get_course_by_name("MATH 3A ");
+		
 		
 		System.out.println("Creating Schedule with CmpSc 8, CmpSc 24, Math 4A, and Math 6A:");
 		scheduler.add(cs8);
