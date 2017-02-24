@@ -27,7 +27,7 @@ public class CourseScraper {
     
     public Course get_course_by_name(String courseName){
         for(int i = 0; i < courseList.size(); i++){
-        		if(courseList.get(i).get_id().equals(courseName))
+        		if(((courseList.get(i)).get_id()).equals(courseName))
         			return courseList.get(i);
         }
         System.out.println("Course could not be found.");

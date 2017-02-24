@@ -22,7 +22,7 @@ public class Schedule {
 
       for (int i = 0; i < time1.size(); i++) {
         for (int j = 0; j < time2.size(); j++) {
-          if (Util.have_conflict(time1.get(i), time2.get(j))) {
+          if (!Util.have_conflict(time1.get(i), time2.get(j))) {
             // TO-DO: delete that element in the second list
             time2.remove(j);
           }
@@ -33,6 +33,12 @@ public class Schedule {
       else
         return true;
 	}
+    
+    public void clearSchedule(){
+    	while(courses.size() != 0){
+    		delete(courses.get(0));
+    	}
+    }
     
     // if c result in conflicts, then just print a message and return
     public void add(Course c) {
@@ -47,11 +53,11 @@ public class Schedule {
           System.out.println("Course already added!!!");
           return;
         }
-        if (!Course.compare(temp, c) || !compare(sections.get(i), sectionTime) || !compare(temp.get_lectureTimes(), sectionTime)) {
+        //if (!Course.compare(temp, c) || !compare(sections.get(i), sectionTime) || !compare(temp.get_lectureTimes(), sectionTime)) {
           // Only for command line version!!!
-          System.out.println("Conflicts detected! This course cannot be add to schedule!");
-          return;
-        }
+          //System.out.println("Conflicts detected! This course cannot be add to schedule!");
+          //return;
+        //}
       }
 
       courses.add(c);
@@ -90,7 +96,7 @@ public class Schedule {
 	    	int i = courses.indexOf(c);
 	    	courses.remove(i);
 	    	sections.remove(i);
-	    	System.out.println(c.get_name() + " is being deleted.");
+	    	System.out.println(c.get_id() + " is being deleted.");
 	    	//user should be given some kind of warning - course being deleted because of time conflict/or personal choice
     }
     
