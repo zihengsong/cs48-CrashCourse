@@ -15,6 +15,10 @@ public class CourseScraper {
     
     private static ArrayList<Course> courseList; // store all courses grabbed from website
     
+    public CourseScraper(){
+        courseList = new ArrayList<Course>();
+    }
+    
     @Override
     public String toString(){
     	return "stub";
@@ -58,7 +62,9 @@ public class CourseScraper {
 	// 			More examples: "20143" = Summer 2014, "20691" = Winter 2069
 	//
 	// courseLevel: "Undergraduate", "Graduate", or "All" (only 3 options, and first letter should be capitalized)
-	public static void getCourseListFor(String courseDepartment, String quarter, String courseLevel) {
+	public String getCourseListFor(String courseDepartment, String quarter, String courseLevel) {
+	  String res = "";
+   
 		try {
 		    String url = "https://my.sa.ucsb.edu/public/curriculum/coursesearch.aspx";
 		    Connection.Response ucsbCurriculum = Jsoup.connect(url).method(Connection.Method.GET).execute();
@@ -90,6 +96,7 @@ public class CourseScraper {
 		    
 		    Course c = null;
 		    Elements courseRow = page.select("tr.CourseInfoRow");
+      
 		    for (Element row : courseRow) {
 	    		Elements Professors = row.select("td:nth-child(6)");
 	    		Elements courseID = row.select("td:nth-child(2)");
@@ -104,7 +111,7 @@ public class CourseScraper {
 	    		String day = Days.text();
 	    		String time = Time.text();
 	    		String location = Location.text();
-//		    		String formatted;
+          String formatted;
 	    		
 	    		if (professorName.length() > 1 && title.length() > 1) {
 	    			if(c != null)
@@ -116,9 +123,11 @@ public class CourseScraper {
 	    					c.add_lectureTimes(Util.converts_to_minute(""+day.charAt(i), time));
 	    				}
 		    			
-//		    			formatted = id + ": " + title + "// " + professorName + ", " + 
-//		    						day + " @ " + time + ", " + location;
-//	
+		    			formatted = id + ": " + title + "// " + professorName + ", " + 
+		    						day + " @ " + time + ", " + location;
+		    						
+		    			res += formatted + "\n";
+	
 //		    			System.out.println(formatted);
 		    		} 
 	    		else {
@@ -128,23 +137,21 @@ public class CourseScraper {
 	    				}
 	    			
 	    			
-//		    			String tab = "";
-//		    			for (int i = 0; i < id.length()+2; i++) {
-//		    				tab += " ";
-//		    			}
-//		    			
-//		    			formatted = tab + day + " @ " + time + ", " + location;
+		    			String tab = "";
+		    			for (int i = 0; i < id.length()+2; i++) {
+		    				tab += " ";
+		    			}
+		    			
+            formatted = tab + day + " @ " + time + ", " + location;
+            res += formatted + "\n";
 //		    			System.out.println(formatted);	
 	    		}
 		    }
-		    courseList.add(c);
+		    if (c != null)
+          courseList.add(c);
 		} catch (IOException e) {
 		    e.printStackTrace();
 		}
-	}
-	
-	public static void main(String[] args) {
-		getCourseListFor("CMPSC", "20172", "Undergraduate");
-//		printDepartments();
+		return res;
 	}
 }

@@ -8,47 +8,55 @@ import ucsbCurriculum.Utility.*;
 // ArrayList of (ArrayList of sections) 
 public class Schedule {
     // just write out the structure, change the variable name if you want
-    private ArrayList<Course> courses = new ArrayList<Course>();
-    private ArrayList<ArrayList<Time>> sections = new ArrayList<ArrayList<Time>>();
+    private ArrayList<Course> courses;
+    private ArrayList<ArrayList<Time>> sections;
     
+    public Schedule(){
+        courses = new ArrayList<Course>();
+        sections = new ArrayList<ArrayList<Time>>();
+    }
+
     public static boolean compare(ArrayList<Time> time1, ArrayList<Time> time2) {
-		int len1 = time1.size();
-		int len2 = time2.size();
-		
-		for (int i = 0; i < len1; i++) {
-			for (int j = 0; j < len2; j++) {
-				if (Util.have_conflict(time1.get(i), time2.get(j))) {
-					// TO-DO: delete that element in the second list
-					time2.remove(j);
-				}
-			}
-		}
-		if (time2.size()==0)
-			return false;
-		else
-			return true;
+      int len1 = time1.size();
+      int len2 = time2.size();
+
+      for (int i = 0; i < len1; i++) {
+        for (int j = 0; j < len2; j++) {
+          if (Util.have_conflict(time1.get(i), time2.get(j))) {
+            // TO-DO: delete that element in the second list
+            time2.remove(j);
+          }
+        }
+      }
+      if (time2.size()==0)
+        return false;
+      else
+        return true;
 	}
     
     // if c result in conflicts, then just print a message and return
     public void add(Course c) {
-		ArrayList<Time> sectionTime = c.get_sectionTimes();
-		for (int i = 0; i < courses.size(); i++) {
-			Course temp = courses.get(i);
-			
-			if (temp == c) {	
-				// Only for command line version!!!
-				System.out.println("Course already added!!!");
-				return;
-			}
-			if (!Course.compare(temp, c) || !compare(sections.get(i), sectionTime) || !compare(temp.get_lectureTimes(), sectionTime)) {
-				// Only for command line version!!!
-				System.out.println("Conflicts detected! This course cannot be add to schedule!");
-				return;
-			}
-		}
-		
-		courses.add(c);
-		sections.add(sectionTime);
+      if(c == null)
+        System.out.println("卧槽");
+  
+      ArrayList<Time> sectionTime = c.get_sectionTimes();
+      for (int i = 0; i < courses.size(); i++) {
+        Course temp = courses.get(i);
+
+        if (temp == c) {	
+          // Only for command line version!!!
+          System.out.println("Course already added!!!");
+          return;
+        }
+        if (!Course.compare(temp, c) || !compare(sections.get(i), sectionTime) || !compare(temp.get_lectureTimes(), sectionTime)) {
+          // Only for command line version!!!
+          System.out.println("Conflicts detected! This course cannot be add to schedule!");
+          return;
+        }
+      }
+
+      courses.add(c);
+      sections.add(sectionTime);
     }
     
     @Override
