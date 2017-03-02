@@ -13,8 +13,8 @@ public class Course {
 	
 	//String description;  description of the course, save for later
 	
-	private ArrayList<Time> lectureTimes = new ArrayList<Time>();
-	private ArrayList<Time> sectionTimes = new ArrayList<Time>();
+	private ArrayList<Time> lectureTimes;
+	private ArrayList<Time> sectionTimes;
     
     // Constructor
     public Course(String id, String name, String location, String instructor) {
@@ -22,6 +22,8 @@ public class Course {
         this.name = name;
         this.location = location;
         this.instructor = instructor;
+        lectureTimes = new ArrayList<Time>();
+        sectionTimes = new ArrayList<Time>();
     }
     
     // Use with constructor to build a complete Course object
@@ -63,17 +65,23 @@ public class Course {
     public static boolean compare(Course c1, Course c2) {
         return c1.compareTo(c2);
     }
+    
+    @Override
+    public boolean equals(Object obj) {
+	    if(obj == null)
+	    		return false;
+	    if(obj.getClass() != Course.class)
+	    		return false;
+	    Course c = (Course)obj;
+	    if(c.get_id() == this.id)
+	    		return true;
+	    return false;
+    }
 	
 	@Override
 	public String toString() {
-		// stub
-		// to-do
-		return super.toString();
+		// not done yet
+//		String res = name + ": " + instructor + " @ " + time + ", " + location;
+		return "something";
 	}
 }
-
-
-
-
-
-
